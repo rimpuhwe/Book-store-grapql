@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: Book
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Bookstore_Management_System
+    password: raissamich12@gmail.com
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+
+
+  graphql:
+    graphiql:
+      enabled: true
