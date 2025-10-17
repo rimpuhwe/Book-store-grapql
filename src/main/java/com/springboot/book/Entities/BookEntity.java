@@ -1,17 +1,36 @@
-package com.springboot.book;
+package com.springboot.book.Entities;
 
+import com.springboot.book.Records.AuthorInput;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Data;
 
-@Getter
-@Setter
+
+@Data
 @Entity
-@Table(name = "booke_ntity")
+@Table(name = "books")
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private Integer id;
+
+
+    @NotEmpty
+    @Column(nullable = false)
+    private String bookName;
+
+
+    @NotEmpty
+    @Column(nullable = false)
+    private String author;
+
+
+    @Min(message = "the number of pages can not be negative", value = 0)
+    @Column(nullable = false)
+    private int pageCount;
 
 }
