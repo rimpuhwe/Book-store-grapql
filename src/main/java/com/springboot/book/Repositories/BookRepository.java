@@ -1,4 +1,7 @@
 package com.springboot.book.Repositories;
 
-public interface BookRepository extends org.springframework.data.jpa.repository.JpaRepository<com.springboot.book.Entities.BookEntity, java.lang.Integer> {
-  }
+import com.springboot.book.Entities.BookEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<BookEntity, Integer> {
+}
