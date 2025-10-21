@@ -1,0 +1,31 @@
+type Query{
+    Books : [Book]
+
+}
+type Book{
+    bookName : String,
+    pageCount : Int,
+    author: String
+}
+
+input CreateBookInput{
+    name: String!,
+    pageCount:  Int,
+    author : String!
+}
+input UpdateBookInput{
+    id : ID!,
+    name: String,
+    pageCount:Int,
+    author: String
+
+}
+
+type Mutation{
+    createNewBook(input: CreateBookInput): Book
+    updateBook(input: UpdateBookInput): Book
+    deleteBook(name: String) : Boolean
+}
+
+
+
