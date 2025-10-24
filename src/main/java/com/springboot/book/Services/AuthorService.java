@@ -1,4 +1,4 @@
 package com.springboot.book.Services;
 
-public class BookService {
+public class AuthorService {
 }

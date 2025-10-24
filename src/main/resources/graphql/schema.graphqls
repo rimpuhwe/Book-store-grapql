@@ -1,17 +1,27 @@
 type Query{
     Books : [Book]
+    Authors : [Author]
 
 }
 type Book{
     bookName : String,
     pageCount : Int,
-    author: String
+    author: Author
+}
+type Author{
+    name: String
+    email: String
+    books : [Book]!
+}
+input AuthorInput{
+    name : String
+    email: String
 }
 
 input CreateBookInput{
     name: String!,
     pageCount:  Int,
-    author : String!
+    author : AuthorInput!
 }
 input UpdateBookInput{
     id : ID!,
@@ -21,8 +31,10 @@ input UpdateBookInput{
 
 }
 
+
 type Mutation{
-    createNewBook(input: CreateBookInput): Book
+    createNewAuthor(input: AuthorInput):Author
+    createNewBook(id: ID,input: CreateBookInput): Book
     updateBook(input: UpdateBookInput): Book
     deleteBook(name: String) : Boolean
 }
