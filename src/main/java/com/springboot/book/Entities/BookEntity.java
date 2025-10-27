@@ -1,11 +1,8 @@
 package com.springboot.book.Entities;
 
-import com.springboot.book.Records.AuthorInput;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 
@@ -23,11 +20,9 @@ public class BookEntity {
     @Column(nullable = false)
     private String bookName;
 
-
-    @NotEmpty
-    @Column(nullable = false)
-    private String author;
-
+    @ManyToOne
+    @JoinColumn
+    private AuthorEntity  author;
 
     @Min(message = "the number of pages can not be negative", value = 0)
     @Column(nullable = false)

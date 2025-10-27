@@ -1,4 +1,6 @@
 package com.springboot.book.Records;
 
-public record Author() {
+import java.util.List;
+
+public record Author(String name,String email, List<Book> books) {
 }

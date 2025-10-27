@@ -2,7 +2,6 @@ package com.springboot.book.controllers;
 
 import com.springboot.book.Records.Book;
 import com.springboot.book.Records.CreateBookInput;
-import com.springboot.book.Records.UpdateBookInput;
 import com.springboot.book.Services.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -18,22 +17,27 @@ public class BookController {
     private final BookService service;
 
     @MutationMapping("createNewBook")
-    public Book createNewBook(@Argument("input") CreateBookInput book){
-        return service.createBook(book);
-    }
+    public Book createNewBook(@Argument("input") CreateBookInput book ,@Argument("id") int id){
 
+        return service.createBook(id,book);
+    }
     @QueryMapping
     public List<Book> Books(){
+        return service.getAllBook();
+    }
 
-        return service.getAllBooks();
-    }
-    @MutationMapping("updateBook")
-    public Book updateBook(@Argument("input") UpdateBookInput book){
-        return service.updateBook(book);
-    }
-    @MutationMapping("deleteBook")
-    public Boolean deleteBook(@Argument String name){
-        return  service.deleteBook(name);
-    }
+//    @QueryMapping
+//    public List<Book> Books(){
+//
+//        return service.getAllBooks();
+//    }
+//    @MutationMapping("updateBook")
+//    public Book updateBook(@Argument("input") UpdateBookInput book){
+//        return service.updateBook(book);
+//    }
+//    @MutationMapping("deleteBook")
+//    public Boolean deleteBook(@Argument String name){
+//        return  service.deleteBook(name);
+//    }
 
 }

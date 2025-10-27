@@ -1,6 +1,4 @@
 package com.springboot.book.Records;
 
-public record AuthorInput(int id,
-                          String name,
-                          String email) {
+public record AuthorInput(String name, String email) {
 }

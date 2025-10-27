@@ -1,4 +1,11 @@
 package com.springboot.book.Repositories;
 
-public interface AuthorRepository extends org.springframework.data.jpa.repository.JpaRepository<com.springboot.book.Entities.Author, java.lang.Integer> {
-  }
+import com.springboot.book.Entities.AuthorEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+
+public interface AuthorRepository extends JpaRepository<AuthorEntity, Integer> {
+
+    AuthorEntity findByName(String name);
+}
