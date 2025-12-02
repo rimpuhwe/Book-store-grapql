@@ -1,0 +1,43 @@
+name: Java 21 Spring Boot CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Java 21
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # 3. Cache Maven dependencies
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      # 4. Build the project
+      - name: Build and Test
+        run: mvn clean install
+
+      # 5. Run Checkstyle (optional if configured)
+      - name: Run Checkstyle
+        run: mvn checkstyle:check || true
+
+      # 6. Run Spotless Check (optional if configured)
+      - name: Run Spotless Check
+        run: mvn spotless:check || true
