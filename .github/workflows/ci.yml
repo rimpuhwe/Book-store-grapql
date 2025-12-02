@@ -2,42 +2,45 @@ name: Java 21 Spring Boot CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the repository
-      - name: Checkout code
+      # 1. Checkout the code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Set up Java 21
-      - name: Set up JDK 21
+      # 2. Setup JDK 21
+      - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 21
 
       # 3. Cache Maven dependencies
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+#      - name: Cache Maven dependencies
+#        uses: actions/cache@v3
+#        with:
+#          path: ${{ env.HOME }}/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-maven-
 
       # 4. Build the project
-      - name: Build and Test
-        run: mvn clean install
+      - name: Build with Maven
+        run: mvn clean install --batch-mode
 
-      # 5. Run Checkstyle (optional if configured)
+      # 5. Run Checkstyle
       - name: Run Checkstyle
-        run: mvn checkstyle:check || true
+        run: mvn checkstyle:check
 
-      # 6. Run Spotless Check (optional if configured)
-      - name: Run Spotless Check
-        run: mvn spotless:check || true
+      # 6. Run Spotless
+      - name: Run Spotless
+        run: mvn spotless:check
