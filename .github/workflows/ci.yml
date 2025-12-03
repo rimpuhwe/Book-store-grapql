@@ -34,3 +34,9 @@ jobs:
         with:
           name: spring-app
           path: staging
+      - name: Show Surefire reports
+        if: failure()
+        run: |
+          echo "===== SUREFIRE REPORTS ====="
+          ls -R target/surefire-reports
+          cat target/surefire-reports/*.txt || true
